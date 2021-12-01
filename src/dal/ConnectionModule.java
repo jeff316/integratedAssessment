@@ -29,7 +29,7 @@ public class ConnectionModule {
             return con;
             
         } catch (Exception e) {
-            System.out.println(e);
+            //System.out.println(e);
             return null;
             
         }
