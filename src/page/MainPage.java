@@ -58,6 +58,7 @@ public class MainPage extends javax.swing.JFrame {
 
         regUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         regUser.setText("User");
+        regUser.setEnabled(false);
         reg.add(regUser);
 
         set.add(reg);
@@ -70,6 +71,7 @@ public class MainPage extends javax.swing.JFrame {
 
         equaReg.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.ALT_MASK));
         equaReg.setText("Registered");
+        equaReg.setEnabled(false);
         equa.add(equaReg);
 
         set.add(equa);
@@ -153,10 +155,10 @@ public class MainPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane deskop;
     private javax.swing.JMenu equa;
-    private javax.swing.JMenuItem equaReg;
+    public static javax.swing.JMenuItem equaReg;
     private javax.swing.JMenuItem equaSo;
     private javax.swing.JMenu reg;
-    private javax.swing.JMenuItem regUser;
+    public static javax.swing.JMenuItem regUser;
     private javax.swing.JMenuBar set;
     private javax.swing.JMenu set1;
     private javax.swing.JMenuItem set1Exi;

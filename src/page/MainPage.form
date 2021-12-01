@@ -15,7 +15,11 @@
                   <KeyStroke key="Alt+F1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="User"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -38,7 +42,11 @@
                   <KeyStroke key="Alt+F3"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registered"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -31,11 +31,24 @@ public void Login(){
         rs = pst.executeQuery();
         //if there is correpondent user
         if (rs.next()){
+            //line bellow obten the type user from database
+            String uType = rs.getString(6);
+            //support to check if line abobe is working
+            //System.out.println(uType);
+            if (uType.equals("admin")){
+            MainPage main = new MainPage();
+            main.setVisible(true);
+            //setVisible the Register/ User and Equation/Registered  
+            MainPage.regUser.setEnabled(true);
+            MainPage.equaReg.setEnabled(true);
+            this.dispose();
+            con.close();
+            }else{
             MainPage main = new MainPage();
             main.setVisible(true);
             this.dispose();
-            con.close();
-            
+                
+            }
         }else{
             JOptionPane.showMessageDialog(null,"User or password invalid");
         }
