@@ -32,7 +32,7 @@ public void Login(){
         //if there is correpondent user
         if (rs.next()){
             //line bellow obten the type user from database
-            String uType = rs.getString(6);
+            String uType = rs.getString(5);
             //support to check if line abobe is working
             //System.out.println(uType);
             if (uType.equals("admin")){

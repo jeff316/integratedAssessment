@@ -29,7 +29,7 @@ public class MainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        deskop = new javax.swing.JDesktopPane();
+        desktop = new javax.swing.JDesktopPane();
         set = new javax.swing.JMenuBar();
         reg = new javax.swing.JMenu();
         regUser = new javax.swing.JMenuItem();
@@ -43,22 +43,34 @@ public class MainPage extends javax.swing.JFrame {
         setTitle("Equation solver System");
         setResizable(false);
 
-        javax.swing.GroupLayout deskopLayout = new javax.swing.GroupLayout(deskop);
-        deskop.setLayout(deskopLayout);
-        deskopLayout.setHorizontalGroup(
-            deskopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 742, Short.MAX_VALUE)
+        desktop.setPreferredSize(new java.awt.Dimension(700, 550));
+
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
-        deskopLayout.setVerticalGroup(
-            deskopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
 
         reg.setText("Register");
+        reg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regActionPerformed(evt);
+            }
+        });
 
         regUser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         regUser.setText("User");
         regUser.setEnabled(false);
+        regUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regUserActionPerformed(evt);
+            }
+        });
         reg.add(regUser);
 
         set.add(reg);
@@ -96,14 +108,13 @@ public class MainPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(deskop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 160, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(deskop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(920, 628));
@@ -116,6 +127,17 @@ public class MainPage extends javax.swing.JFrame {
         if (exit == JOptionPane.YES_OPTION);
         System.exit(0);
     }//GEN-LAST:event_set1ExiActionPerformed
+
+    private void regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regActionPerformed
+    
+    }//GEN-LAST:event_regActionPerformed
+
+    private void regUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserActionPerformed
+       //code bellow open the user page from desktop page
+        UserPage user = new UserPage();
+        user.setVisible(true);
+        desktop.add(user);
+    }//GEN-LAST:event_regUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,7 +175,7 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane deskop;
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu equa;
     public static javax.swing.JMenuItem equaReg;
     private javax.swing.JMenuItem equaSo;
