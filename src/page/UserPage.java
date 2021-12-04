@@ -26,6 +26,7 @@ ResultSet rs = null;
         con = ConnectionModule.conector();
     }
     private void read(){
+        
         String sql = "Select * from tbusers where iduser=?";
         try {
             pst= con.prepareStatement(sql);
@@ -42,16 +43,79 @@ ResultSet rs = null;
                 txtUserName.setText(null);
                 txtUserLogin.setText(null);
                 txtUserPassword.setText(null);
-                cboUserType.setSelectedItem(null);
+              
             }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
         
-        
     }
-
+    //the block bellow make the text fiels on the user page available 
+    //to be filled
+        private void add(){
+            String sql = "insert into tbusers(iduser, u_name, u_login, u_password, u_Type)values(?, ?, ?, ?, ?)";
+            try {
+                  pst= con.prepareStatement(sql);
+                  pst.setString(1, txtUserId.getText());
+                pst.setString(2, txtUserName.getText());
+                pst.setString(3, txtUserLogin.getText());
+                pst.setString(4, txtUserPassword.getText());
+                pst.setString(5, cboUserType.getSelectedItem().toString());
+                
+                if ((txtUserId.getText().isEmpty())||(txtUserName.getText().isEmpty())||(txtUserLogin.getText().isEmpty())||(txtUserPassword.getText().isEmpty())) {
+                    JOptionPane.showMessageDialog(null,"Fill required fields");
+                } else {
+                
+                
+                //line bellow save a new user profile on the database
+                //strutcute bellow confirm the addition of new user 
+               int added = pst.executeUpdate();
+               if (added > 0){
+                   JOptionPane.showMessageDialog(null,"New user added successfully");
+                txtUserId.setText(null);
+                txtUserName.setText(null);
+                txtUserLogin.setText(null);
+                txtUserPassword.setText(null);
+           
+               }
+                }  
+            } catch (Exception e) {
+                  JOptionPane.showMessageDialog(null,e);
+            }
+        }
+    private void update (){
+        String sql="update tbusers set u_name=?, u_login=?, u_password=?, u_type=? where iduser=?";
+        try {
+            pst=con.prepareStatement(sql);
+            pst.setString(1, txtUserName.getText());
+            pst.setString(2, txtUserLogin.getText());
+            pst.setString(3, txtUserPassword.getText());
+            pst.setString(4, cboUserType.getSelectedItem().toString());
+            pst.setString(5, txtUserId.getText());
+             if ((txtUserId.getText().isEmpty())||(txtUserName.getText().isEmpty())||(txtUserLogin.getText().isEmpty())||(txtUserPassword.getText().isEmpty())) {
+                    JOptionPane.showMessageDialog(null,"Fill required fields");
+                } else {
+                
+                
+                //line bellow save a new user profile on the database
+                //strutcute bellow update a user file
+               int added = pst.executeUpdate();
+               if (added > 0){
+                   JOptionPane.showMessageDialog(null,"Update saved successfully");
+                txtUserId.setText(null);
+                txtUserName.setText(null);
+                txtUserLogin.setText(null);
+                txtUserPassword.setText(null);
+           
+               }
+              }     
+            
+        } catch (Exception e) {
+              JOptionPane.showMessageDialog(null,e);
+              
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,6 +139,7 @@ ResultSet rs = null;
         btnUserRead = new javax.swing.JButton();
         btnUserUp = new javax.swing.JButton();
         btnUserDelete = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -84,21 +149,26 @@ ResultSet rs = null;
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(700, 550));
 
-        jLabel1.setText("ID");
+        jLabel1.setText("*ID");
 
-        jLabel2.setText("Name");
+        jLabel2.setText("*Name");
 
-        jLabel3.setText("Login");
+        jLabel3.setText("*Login");
 
-        jLabel4.setText("Password");
+        jLabel4.setText("*Password");
 
-        jLabel5.setText("Type");
+        jLabel5.setText("*Type");
 
         cboUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin\t", "user" }));
 
         btnUserCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/create file.png"))); // NOI18N
         btnUserCreate.setToolTipText("Create new");
         btnUserCreate.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUserCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserCreateActionPerformed(evt);
+            }
+        });
 
         btnUserRead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/read file.png"))); // NOI18N
         btnUserRead.setToolTipText("Read");
@@ -113,10 +183,17 @@ ResultSet rs = null;
         btnUserUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/update file.png"))); // NOI18N
         btnUserUp.setToolTipText("Update");
         btnUserUp.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUserUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserUpActionPerformed(evt);
+            }
+        });
 
         btnUserDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete file.png"))); // NOI18N
         btnUserDelete.setToolTipText("Delete file");
         btnUserDelete.setPreferredSize(new java.awt.Dimension(80, 80));
+
+        jLabel6.setText("*Required Fields");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,20 +226,22 @@ ResultSet rs = null;
                                         .addComponent(txtUserLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(62, 62, 62)
                                         .addComponent(jLabel4)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(txtUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(187, 187, 187)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(42, 42, 42)
-                                .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(297, 297, 297)
+                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(21, 21, 21)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(140, Short.MAX_VALUE))))
+                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(132, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +249,8 @@ ResultSet rs = null;
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -202,6 +282,16 @@ ResultSet rs = null;
         read();
     }//GEN-LAST:event_btnUserReadActionPerformed
 
+    private void btnUserCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserCreateActionPerformed
+        // call method add
+        add();
+    }//GEN-LAST:event_btnUserCreateActionPerformed
+
+    private void btnUserUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserUpActionPerformed
+        // call update method
+        update();
+    }//GEN-LAST:event_btnUserUpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUserCreate;
@@ -214,6 +304,7 @@ ResultSet rs = null;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtUserId;
     private javax.swing.JTextField txtUserLogin;
     private javax.swing.JTextField txtUserName;
