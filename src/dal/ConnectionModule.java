@@ -21,7 +21,7 @@ public class ConnectionModule {
     //store information about the database
         String url = "jdbc:mysql://localhost:3306/dbequationsolver";
         String user = "root";
-        String password = "root";
+        String password = "Fabio35272114";
      //establishing connection with the database
         try {
             Class.forName(driver);
@@ -29,7 +29,7 @@ public class ConnectionModule {
             return con;
             
         } catch (Exception e) {
-            //System.out.println(e);
+            System.out.println(e);
             return null;
             
         }

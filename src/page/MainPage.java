@@ -79,6 +79,11 @@ public class MainPage extends javax.swing.JFrame {
 
         equaSo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.ALT_MASK));
         equaSo.setText("Solve");
+        equaSo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equaSoActionPerformed(evt);
+            }
+        });
         equa.add(equaSo);
 
         equaReg.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.ALT_MASK));
@@ -114,7 +119,7 @@ public class MainPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+            .addComponent(desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(920, 628));
@@ -138,6 +143,13 @@ public class MainPage extends javax.swing.JFrame {
         user.setVisible(true);
         desktop.add(user);
     }//GEN-LAST:event_regUserActionPerformed
+
+    private void equaSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equaSoActionPerformed
+        SolvePage solve = new SolvePage();
+        
+        solve.setVisible(true);
+        desktop.add(solve);
+    }//GEN-LAST:event_equaSoActionPerformed
 
     /**
      * @param args the command line arguments
