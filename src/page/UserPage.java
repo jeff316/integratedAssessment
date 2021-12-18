@@ -117,6 +117,28 @@ ResultSet rs = null;
               
         }
     }
+    //delete method
+    private void delete(){
+        //the structure bellow confirm a uder delete
+        int confirm=JOptionPane.showConfirmDialog(null, "Are you sure you want to delere this user","Attention",JOptionPane.YES_NO_OPTION);
+        if(confirm==JOptionPane.YES_OPTION){
+            String sql="delete from tbusers where iduser=?";
+            try{
+                pst=con.prepareStatement(sql);
+                pst.setString(1, txtUserId.getText());
+                int deleted = pst.executeUpdate();
+                if(deleted > 0){
+                    JOptionPane.showMessageDialog(null, "User successfuly deleted");
+                    txtUserId.setText(null);
+                    txtUserName.setText(null);
+                    txtUserLogin.setText(null);
+                    txtUserPassword.setText(null);
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,6 +215,11 @@ ResultSet rs = null;
         btnUserDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete file.png"))); // NOI18N
         btnUserDelete.setToolTipText("Delete file");
         btnUserDelete.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUserDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("*Required Fields");
 
@@ -292,6 +319,11 @@ ResultSet rs = null;
         // call update method
         update();
     }//GEN-LAST:event_btnUserUpActionPerformed
+
+    private void btnUserDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserDeleteActionPerformed
+        // calling delete meyhod 
+        delete();
+    }//GEN-LAST:event_btnUserDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
